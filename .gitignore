@@ -3,3 +3,10 @@
 /api-test/api-test-service/target/
 /api-test/api-test-entity/target/
 /api-test/api-test-dao/target/
+/.idea/
+/spring-boot-druid-sharding-jdbc-mybatis.iml
+/api-test/api-test.iml
+/api-test/api-test-web/api-test-web.iml
+/api-test/api-test-service/api-test-service.iml
+/api-test/api-test-entity/api-test-entity.iml
+/api-test/api-test-dao/api-test-dao.iml

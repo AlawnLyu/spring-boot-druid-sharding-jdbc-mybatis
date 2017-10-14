@@ -16,6 +16,7 @@ import io.shardingjdbc.core.yaml.sharding.YamlShardingDataSource;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceBuilder;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -34,44 +35,44 @@ import java.util.Map;
 @Configuration
 public class TestApiConfiguration {
 
-    @Value("${sharding.config_file}")
-    private String shardingConfigFile = "";
+//    @Value("${sharding.config_file}")
+//    private String shardingConfigFile = "";
 
-    @Bean(name="db_0")
-    @Primary
-    @ConfigurationProperties(prefix = "spring.datasource.db_0")
-    public DataSource primaryDataSource() {
-        return DataSourceBuilder.create().build();
-    }
+//    @Bean(name="ds_0")
+//    @Primary
+//    @ConfigurationProperties(prefix = "spring.datasource.ds_0")
+//    public DataSource primaryDataSource() {
+//        return DataSourceBuilder.create().build();
+//    }
+//
+//    @Bean(name = "ds_1")
+//    @ConfigurationProperties(prefix = "spring.datasource.ds_1")
+//    public DataSource secondDataSource() {
+//        return DataSourceBuilder.create().build();
+//    }
 
-    @Bean(name = "db_1")
-    @ConfigurationProperties(prefix = "spring.datasource.db_1")
-    public DataSource secondDataSource() {
-        return DataSourceBuilder.create().build();
-    }
+//    @Bean(name = "sqlSessionFactory")
+//    public SqlSessionFactory sqlSessionFactoryBean() throws Exception {
+//        SqlSessionFactoryBean bean = new SqlSessionFactoryBean();
+//        bean.setDataSource(dataSource);
+//        return bean.getObject();
+//    }
+//
+//    @Bean
+//    public SqlSessionTemplate sqlSessionTemplate(SqlSessionFactory sqlSessionFactory) {
+//        return new SqlSessionTemplate(sqlSessionFactory);
+//    }
 
-    @Bean(name = "sqlSessionFactory")
-    public SqlSessionFactory sqlSessionFactoryBean() throws Exception {
-        SqlSessionFactoryBean bean = new SqlSessionFactoryBean();
-        bean.setDataSource(getShardingDataSource());
-        return bean.getObject();
-    }
-
-    @Bean
-    public SqlSessionTemplate sqlSessionTemplate(SqlSessionFactory sqlSessionFactory) {
-        return new SqlSessionTemplate(sqlSessionFactory);
-    }
-
-    private DataSource getShardingDataSource() throws SQLException, IOException {
-        ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext();
-        return ShardingDataSourceFactory.createDataSource(createDataSourceMap(),
-                ctx.getResource(shardingConfigFile).getFile());
-    }
-
-    private Map<String, DataSource> createDataSourceMap() {
-        Map<String, DataSource> result = new HashMap<>(2, 1);
-        result.put("ds_0", primaryDataSource());
-        result.put("ds_1", secondDataSource());
-        return result;
-    }
+//    private DataSource getShardingDataSource() throws SQLException, IOException {
+//        ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext();
+//        return ShardingDataSourceFactory.createDataSource(createDataSourceMap(),
+//                ctx.getResource(shardingConfigFile).getFile());
+//    }
+//
+//    private Map<String, DataSource> createDataSourceMap() {
+//        Map<String, DataSource> result = new HashMap<>(2, 1);
+//        result.put("ds_0", primaryDataSource());
+//        result.put("ds_1", secondDataSource());
+//        return result;
+//    }
 }

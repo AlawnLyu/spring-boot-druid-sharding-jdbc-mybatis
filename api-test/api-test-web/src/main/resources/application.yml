@@ -3,11 +3,11 @@ server:
 
 sharding:
   config_file: yamlShardingDatabaseAndTable.yaml
-  
+
 spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
-    db_0:
+    ds_0:
       type: com.alibaba.druid.pool.DruidDataSource
       driver-class-name: com.mysql.cj.jdbc.Driver
       url: jdbc:mysql://localhost:3306/demo_ds_0?characterEncoding=utf8&useSSL=true&serverTimezone=PRC&nullNamePatternMatchesAll=true
@@ -48,7 +48,7 @@ spring:
       login-password: 8687
       #spring监听配置
       #aop-patterns: 'com.wtown.payment.merchant.service.*'
-    db_1:
+    ds_1:
       type: com.alibaba.druid.pool.DruidDataSource
       driver-class-name: com.mysql.cj.jdbc.Driver
       url: jdbc:mysql://localhost:3306/demo_ds_1?characterEncoding=utf8&useSSL=true&serverTimezone=PRC&nullNamePatternMatchesAll=true
