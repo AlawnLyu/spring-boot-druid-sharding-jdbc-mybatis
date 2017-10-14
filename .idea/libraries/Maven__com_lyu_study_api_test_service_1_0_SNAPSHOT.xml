@@ -1,0 +1,15 @@
+<component name="libraryTable">
+  <library name="Maven: com.lyu.study:api-test-service:1.0-SNAPSHOT">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/lyu/study/api-test-service/1.0-SNAPSHOT/api-test-service-1.0-SNAPSHOT.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$PROJECT_DIR$/api-test/api-test-service/api-test-service-1.0-SNAPSHOT-javadoc.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/com/lyu/study/api-test-service/1.0-SNAPSHOT/api-test-service-1.0-SNAPSHOT-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/api-test/api-test-service/api-test-service-1.0-SNAPSHOT-sources.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/com/lyu/study/api-test-service/1.0-SNAPSHOT/api-test-service-1.0-SNAPSHOT-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

@@ -1,0 +1,5 @@
+# Created by .ignore support plugin (hsz.mobi)
+/api-test/api-test-web/target/
+/api-test/api-test-service/target/
+/api-test/api-test-entity/target/
+/api-test/api-test-dao/target/
