@@ -18,6 +18,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
+import org.springframework.context.annotation.Profile;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import javax.sql.DataSource;
@@ -56,6 +57,14 @@ public class TestApiConfiguration {
         return new SqlSessionTemplate(sqlSessionFactory);
     }
 
+    /**
+     * @author: LYU
+     * @description:
+     * @method: getShardingDataSource
+     * @param
+     * @return: javax.sql.DataSource
+     * @date: 2017年10月15日 15:18:59
+     */
     private DataSource getShardingDataSource() throws SQLException, IOException {
         ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext();
         return ShardingDataSourceFactory.createDataSource(createDataSourceMap(),

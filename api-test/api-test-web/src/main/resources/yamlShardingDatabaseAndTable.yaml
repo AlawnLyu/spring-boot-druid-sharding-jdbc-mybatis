@@ -15,6 +15,7 @@ tables:
       inline:
         shardingColumn: order_id
         algorithmInlineExpression: t_order_item_${order_id % 2}
+    keyGeneratorColumnName: order_item_id
 
 bindingTables:
   - t_order,t_order_item
@@ -29,4 +30,5 @@ defaultTableStrategy:
   none:
 
 props:
-  sql.show: true
+  sql:
+    show: true
