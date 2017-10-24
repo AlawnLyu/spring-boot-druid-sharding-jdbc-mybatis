@@ -1,0 +1,98 @@
+#默认的主键生成器类
+defaultKeyGeneratorClass: io.shardingjdbc.core.keygen.DefaultKeyGenerator
+
+#分库分表配置，可配置多个logic_table_name
+tables:
+  #逻辑表名
+  t_order:
+    #真实数据节点，由数据源名 + 表名组成，以小数点分隔。多个表以逗号分隔，支持inline表达式。不填写表示为只分库不分表。
+    actualDataNodes: ds_${0..1}.t_order_${0..1}
+    #分库策略，以下的分片策略只能任选其一
+    databaseStrategy:
+#      #标准分片策略，用于单分片键的场景
+#      standard:
+#        #分片列名
+#        shardingColumn:
+#        #精确的分片算法类名称，用于=和IN。该类需使用默认的构造器或者提供无参数的构造器
+#        preciseAlgorithmClassName:
+#        #范围的分片算法类名称，用于BETWEEN，可以不配置。该类需使用默认的构造器或者提供无参数的构造器
+#        rangeAlgorithmClassName:
+#      #复合分片策略，用于多分片键的场景
+#      complex:
+#        #分片列名，多个列以逗号分隔
+#        shardingColumns :
+#        #分片算法类名称。该类需使用默认的构造器或者提供无参数的构造器
+#        algorithmClassName:
+      #inline表达式分片策略
+      inline:
+        #分片列名
+        shardingColumn: user_id
+        #分库算法Inline表达式，需要符合groovy动态语法
+        algorithmInlineExpression: ds_${user_id % 2}
+#      #Hint分片策略
+#      hint:
+#        #分片算法类名称。该类需使用默认的构造器或者提供无参数的构造器
+#        algorithmClassName:
+#      #不分片
+#      none:
+    #分表策略，同分库策略
+    tableStrategy:
+#      standard:
+#        shardingColumn: order_id
+#        preciseAlgorithmClassName: com.lyu.study.test.dao.algorithm.PreciseModuloTableShardingAlgorithm
+      inline:
+        shardingColumn: order_id
+        algorithmInlineExpression: t_order_${order_id % 2}
+    #使用主键生成器生成的列名
+    keyGeneratorColumnName: order_id
+    #keyGeneratorClass: com.lyu.study.test.dao.keygen.CustomKeyGenerator
+  t_order_item:
+    actualDataNodes: ds_${0..1}.t_order_item_${0..1}
+    #分库策略，以下的分片策略只能任选其一
+    databaseStrategy:
+      #inline表达式分片策略
+      inline:
+        #分片列名
+        shardingColumn: user_id
+        #分库算法Inline表达式，需要符合groovy动态语法
+        algorithmInlineExpression: ds_${user_id % 2}
+    tableStrategy:
+      inline:
+        shardingColumn: order_id
+        algorithmInlineExpression: t_order_item_${order_id % 2}
+    keyGeneratorColumnName: order_item_id
+    #设置t_order_item表使用自定义主键生成器
+    #keyGeneratorClass: com.lyu.study.test.dao.keygen.CustomKeyGenerator
+
+#绑定表列表
+bindingTables:
+#- 逻辑表名列表，多个<logic_table_name>以逗号分隔
+  - t_order,t_order_item
+
+#默认数据库分片策略,同分库策略
+defaultDatabaseStrategy:
+  inline:
+    shardingColumn: user_id
+    algorithmInlineExpression: ds_${user_id % 2}
+
+#默认数据表分片策略，同分库策略
+defaultTableStrategy:
+  none:
+
+#主从数据库配置
+masterSlaveRules:
+  ds_0:
+    masterDataSourceName: ds_master_0
+    slaveDataSourceNames: [ds_master_0_slave_0, ds_master_0_slave_1]
+    loadBalanceAlgorithmType: ROUND_ROBIN
+  ds_1:
+    masterDataSourceName: ds_master_1
+    slaveDataSourceNames: [ds_master_1_slave_0, ds_master_1_slave_1]
+    loadBalanceAlgorithmType: ROUND_ROBIN
+
+#属性配置(可选)
+props:
+  #是否开启SQL显示，默认值: false,***目前问题是使用druid后不能在控制台输出sql语句
+  sql.show: true
+#  #工作线程数量，默认值: CPU核数
+#  executor.size:

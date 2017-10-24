@@ -2,8 +2,11 @@ server:
   port: 8080
 
 sharding:
+  env: shardingAndMasterSlave   #配置环境使用哪种配置文件shardingOnly,shardingAndMasterSlave
   #Sharding配置文件路径
-  config_file: yamlShardingDatabaseAndTable.yaml
+  sharding_config_file: yamlShardingDatabaseAndTable.yaml
+  #Sharding_master_slave配置文件路径
+  sharding_ms_config_file: yamlShardingAndMasterSlave.yaml
 
 spring:
   datasource:
@@ -53,6 +56,43 @@ spring:
         type: com.alibaba.druid.pool.DruidDataSource
         driver-class-name: com.mysql.cj.jdbc.Driver
         url: jdbc:mysql://localhost:3306/demo_ds_1?characterEncoding=utf8&useSSL=true&serverTimezone=PRC&nullNamePatternMatchesAll=true
+        username: root
+        password: 123456
+
+      master0:
+        type: com.alibaba.druid.pool.DruidDataSource
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://localhost:3306/demo_ds_0?characterEncoding=utf8&useSSL=true&serverTimezone=PRC&nullNamePatternMatchesAll=true
+        username: root
+        password: 123456
+      master0slave0:
+        type: com.alibaba.druid.pool.DruidDataSource
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://localhost:3307/demo_ds_0?characterEncoding=utf8&useSSL=true&serverTimezone=PRC&nullNamePatternMatchesAll=true
+        username: root
+        password: 123456
+      master0slave1:
+        type: com.alibaba.druid.pool.DruidDataSource
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://localhost:3308/demo_ds_0?characterEncoding=utf8&useSSL=true&serverTimezone=PRC&nullNamePatternMatchesAll=true
+        username: root
+        password: 123456
+      master1:
+        type: com.alibaba.druid.pool.DruidDataSource
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://localhost:3309/demo_ds_1?characterEncoding=utf8&useSSL=true&serverTimezone=PRC&nullNamePatternMatchesAll=true
+        username: root
+        password: 123456
+      master1slave0:
+        type: com.alibaba.druid.pool.DruidDataSource
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://localhost:3310/demo_ds_1?characterEncoding=utf8&useSSL=true&serverTimezone=PRC&nullNamePatternMatchesAll=true
+        username: root
+        password: 123456
+      master1slave1:
+        type: com.alibaba.druid.pool.DruidDataSource
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://localhost:3311/demo_ds_1?characterEncoding=utf8&useSSL=true&serverTimezone=PRC&nullNamePatternMatchesAll=true
         username: root
         password: 123456
   aop:
